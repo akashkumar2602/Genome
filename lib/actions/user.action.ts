@@ -1,6 +1,6 @@
 'use server';
 
-import { signIn, signOut } from '@/auth';
+import { auth, signIn, signOut } from '@/auth';
 import { signInFormSchema, signUpFormSchema } from '../validator';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import { hashSync } from 'bcrypt-ts-edge';
@@ -75,4 +75,36 @@ export async function signUp(prevState: unknown, formData: FormData) {
       message: formatError(error),
     };
   }
+}
+
+// Fetch user details for digitalData
+export async function getUserDataDigitalData() {
+  const session = await auth();
+
+  if (!session?.user) {
+    return null; // User is not logged in
+  }
+  if (!session.user.email) {
+    throw new Error("User email is required");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email as string },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+    },
+  });
+
+  if (!user) return null;
+
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    loggedIn: true,
+    accountType: 'standard', // Example field (you can modify based on your data)
+    subscriptionStatus: 'active', // Example field
+  };
 }

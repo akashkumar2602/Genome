@@ -32,3 +32,14 @@ export async function getFeaturedProducts() {
 
   return convertToPlainObject(data);
 }
+// Get single product by slug for digitalData
+export async function getProductBySlugDigitalData(slug: string) {
+  const product = await prisma.product.findUnique({
+    where: { slug },
+  });
+
+  if (!product) return null;
+
+  // Convert to plain JSON (removes Prisma's internal properties)
+  return JSON.parse(JSON.stringify(product));
+}
