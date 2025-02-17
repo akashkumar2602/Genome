@@ -67,6 +67,16 @@ interface Profile {
   id: string;
   name: string;
   email: string;
+  role: string;
+  loyalityId?: string;
+  loyalityType?: string;
+  phoneNumber?: string;
+  gender?: string;
+  age?: string;
+  dob?: string;
+  city?: string;
+  state?: string;
+  country?: string;
   loggedIn: boolean;
   accountType?: string;
   subscriptionStatus?: string;
@@ -129,9 +139,19 @@ const DigitalData = () => {
           id: user.id,
           name: user.name,
           email: user.email,
-          loggedIn: user.loggedIn,
-          accountType: user.accountType,
-          subscriptionStatus: user.subscriptionStatus,
+          role: user.role,
+          loyalityId: user.loyalityId ?? "",
+          loyalityType: user.loyalityType ?? "gold",
+          phoneNumber: user.phoneNumber ?? "Unknown",
+          gender: user.gender ?? "Unknown",
+          age: user.age ?? "Unknown",
+          dob: user.dob ?? "Unknown",
+          city: user.city ?? "Unknown",
+          state: user.state ?? "Unknown",
+          country: user.country ?? "Unknown",
+          loggedIn: user.loggedIn ?? "Unknown",
+          accountType: user.accountType ?? "Unknown",
+          subscriptionStatus: user.subscriptionStatus ?? "Unknown",
         };
       }
 

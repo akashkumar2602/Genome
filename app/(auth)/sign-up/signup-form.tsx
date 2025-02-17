@@ -54,6 +54,83 @@ const SignUpForm = () => {
           />
         </div>
         <div>
+          <Label htmlFor='phoneNumber'>Phone Number</Label>
+          <Input
+            id='phoneNumber'
+            name='phoneNumber'
+            required
+            type='number'
+            defaultValue={signUpDefaultValues.phoneNumber}
+            autoComplete='phone-number'
+          />
+        </div>
+        <div>
+          <Label htmlFor='gender'>Gender</Label>
+          <Input
+            id='gender'
+            name='gender'
+            required
+            type='text'
+            defaultValue={signUpDefaultValues.gender}
+            autoComplete='gender'
+          />
+        </div>
+        <div>
+          <Label htmlFor='age'>Age</Label>
+          <Input
+            id='age'
+            name='age'
+            required
+            type='text'
+            defaultValue={signUpDefaultValues.age}
+            autoComplete='age'
+          />
+        </div>
+        <div>
+          <Label htmlFor='dob'>Date of Birth</Label>
+          <Input
+            id='dob'
+            name='dob'
+            required
+            type='text'
+            defaultValue={signUpDefaultValues.dob}
+            autoComplete='dob'
+          />
+        </div>
+        <div>
+          <Label htmlFor='city'>City</Label>
+          <Input
+            id='city'
+            name='city'
+            required
+            type='city'
+            defaultValue={signUpDefaultValues.city}
+            autoComplete='city'
+          />
+        </div>
+        <div>
+          <Label htmlFor='state'>State</Label>
+          <Input
+            id='state'
+            name='state'
+            required
+            type='text'
+            defaultValue={signUpDefaultValues.state}
+            autoComplete='state'
+          />
+        </div>
+        <div>
+          <Label htmlFor='age'>Country</Label>
+          <Input
+            id='country'
+            name='country'
+            required
+            type='text'
+            defaultValue={signUpDefaultValues.country}
+            autoComplete='country'
+          />
+        </div>
+        <div>
           <Label htmlFor='password'>Password</Label>
           <Input
             id='password'

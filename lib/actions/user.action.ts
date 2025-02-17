@@ -94,6 +94,16 @@ export async function getUserDataDigitalData() {
       id: true,
       name: true,
       email: true,
+      role: true,
+      loyalityId: true,
+      loyalityType: true,
+      phoneNumber: true,
+      gender: true,
+      age: true,
+      dob: true,
+      city: true,
+      state: true,
+      country: true,
     },
   });
 
@@ -104,6 +114,16 @@ export async function getUserDataDigitalData() {
     name: user.name,
     email: user.email,
     loggedIn: true,
+    role: user.role,
+    loyalityId: user.loyalityId,
+    loyalityType: user.loyalityType,
+    phoneNumber: user.phoneNumber,
+    gender: user.gender,
+    age: user.age,
+    dob: user.dob,
+    city: user.city,
+    state: user.state,
+    country: user.country,
     accountType: 'standard', // Example field (you can modify based on your data)
     subscriptionStatus: 'active', // Example field
   };
