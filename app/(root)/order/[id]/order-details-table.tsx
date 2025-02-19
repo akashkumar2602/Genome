@@ -23,7 +23,7 @@ import {
   approvePayPalOrder,
   createPayPalOrder,
 } from "@/lib/actions/order.actions";
-import { toast, useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const OrderDetailsTable = ({
   order,
