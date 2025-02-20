@@ -184,7 +184,7 @@ const DigitalData = () => {
                 subscriptionStatus: user.subscriptionStatus ?? "Unknown",
               },
               attributes: {
-                username: user.email ?? "Unknown",
+                username: user.id ?? "Unknown",
                 loggedIn: user.loggedIn ?? false,
               },
             },
@@ -232,7 +232,9 @@ const DigitalData = () => {
           attributes: {},
           components: [],
         },
-        product: productDetails ? [{ productInfo: productDetails }] : [],
+        product: productDetails
+          ? [{ productInfo: productDetails }]
+          : [{ productInfo: {} }],
         cart: cartDetails ?? {
           productsInCart: 0,
           orderId: "",
