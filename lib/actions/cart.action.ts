@@ -206,3 +206,38 @@ export async function removeItemFromCart(productId: string) {
     return { success: false, message: formatError(error) };
   }
 }
+
+export async function getCartDataDigitalData() {
+  try {
+    const cart = await getMyCart();
+
+    if (!cart || !cart.items.length) {
+      return {
+        productsInCart: 0,
+        orderId: "",
+        cartAmount: "0.00",
+        cartEntries: [],
+      };
+    }
+    return {
+      productsInCart: cart.items.length,
+      orderId: cart.id ?? "",
+      cartAmount: cart.totalPrice ?? "0.00",
+      cartEntries: cart.items.map((item) => ({
+        qty: item.qty.toString(),
+        sku: item.productId, // Assuming productId is used as SKU
+        title: item.name ?? "Unknown Product",
+        formattedPrice: `$${round2(item.price).toFixed(2)}`,
+        price: round2(item.price).toFixed(2),
+      })),
+    };
+  } catch (error) {
+    console.error("Error fetching cart data:", error);
+    return {
+      productsInCart: 0,
+      orderId: "",
+      cartAmount: "0.00",
+      cartEntries: [],
+    };
+  }
+}
