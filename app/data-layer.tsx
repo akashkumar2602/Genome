@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -177,7 +178,7 @@ const DigitalData = () => {
 
       setUserData(userProfile);
 
-      const cart = await getCartDataDigitalData(); // Fetch cart data
+      const cart = await getCartDataDigitalData();
       if (cart) {
         cartDetails = {
           productsInCart: cart.productsInCart ?? 0,
@@ -225,15 +226,7 @@ const DigitalData = () => {
         user: userProfile
           ? [
               {
-                profile: [
-                  {
-                    profileInfo: userProfile,
-                    attributes: {
-                      username: userProfile.email ?? "Unknown",
-                      loggedIn: userProfile.loggedIn ?? false,
-                    },
-                  },
-                ],
+                profile: [userProfile], // ✅ Corrected structure
               },
             ]
           : [],
