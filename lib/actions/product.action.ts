@@ -31,6 +31,17 @@ export async function getFeaturedProducts() {
 
   return convertToPlainObject(data);
 }
+
+// Get product categories
+export async function getAllCategories() {
+  const data = await prisma.product.groupBy({
+    by: ["category"],
+    _count: true,
+  });
+
+  return data;
+}
+
 // Get single product by slug for digitalData
 export async function getProductBySlugDigitalData(slug: string) {
   const product = await prisma.product.findUnique({
