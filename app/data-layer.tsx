@@ -63,7 +63,13 @@ interface ProductInfo {
 }
 
 interface User {
-  profile: Profile[];
+  profile: {
+    profileInfo: Profile;
+    attributes: {
+      loggedIn: boolean;
+      username: string;
+    };
+  }[];
 }
 
 interface Profile {
@@ -117,14 +123,14 @@ const getPageName = (pathname: string): string => {
 const DigitalData = () => {
   const pathname = usePathname();
   const [productInfo, setProductInfo] = useState<ProductInfo | null>(null);
-  const [userData, setUserData] = useState<Profile | null>(null);
+  const [userData, setUserData] = useState<User | null>(null);
   const [cartData, setCartData] = useState<Cart | null>(null);
 
   useEffect(() => {
     const initializeDigitalData = async () => {
       const pageName = getPageName(pathname);
       let productDetails: ProductInfo | null = null;
-      let userProfile: Profile | null = null;
+      let userProfile: User | null = null;
       let cartDetails: Cart | null = null;
       const segments = pathname.split("/").filter(Boolean);
 
@@ -157,22 +163,32 @@ const DigitalData = () => {
       const user = await getUserDataDigitalData();
       if (user) {
         userProfile = {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          loyalityId: user.loyalityId ?? "",
-          loyalityType: user.loyalityType ?? "gold",
-          phoneNumber: user.phoneNumber ?? "Unknown",
-          gender: user.gender ?? "Unknown",
-          age: user.age ?? "Unknown",
-          dob: user.dob ?? "Unknown",
-          city: user.city ?? "Unknown",
-          state: user.state ?? "Unknown",
-          country: user.country ?? "Unknown",
-          loggedIn: user.loggedIn ?? false,
-          accountType: user.accountType ?? "Unknown",
-          subscriptionStatus: user.subscriptionStatus ?? "Unknown",
+          profile: [
+            {
+              profileInfo: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                loyalityId: user.loyalityId ?? "",
+                loyalityType: user.loyalityType ?? "gold",
+                phoneNumber: user.phoneNumber ?? "Unknown",
+                gender: user.gender ?? "Unknown",
+                age: user.age ?? "Unknown",
+                dob: user.dob ?? "Unknown",
+                city: user.city ?? "Unknown",
+                state: user.state ?? "Unknown",
+                country: user.country ?? "Unknown",
+                loggedIn: user.loggedIn ?? false,
+                accountType: user.accountType ?? "Unknown",
+                subscriptionStatus: user.subscriptionStatus ?? "Unknown",
+              },
+              attributes: {
+                username: user.email ?? "Unknown",
+                loggedIn: user.loggedIn ?? false,
+              },
+            },
+          ],
         };
       }
 
@@ -223,13 +239,7 @@ const DigitalData = () => {
           cartAmount: "0.00",
           cartEntries: [],
         },
-        user: userProfile
-          ? [
-              {
-                profile: [userProfile], // ✅ Corrected structure
-              },
-            ]
-          : [],
+        user: userProfile ? [userProfile] : [],
         pageInstanceID: `s7connect:publish:content:genome:us:en:${pageName}`,
         language: "en",
       };
