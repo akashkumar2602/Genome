@@ -3,9 +3,9 @@ import { Inter } from 'next/font/google';
 import '@/assets/styles/globals.css';
 import { APP_NAME, APP_DESCRIPTION, SERVER_URL } from '@/lib/constants';
 import { ThemeProvider } from "next-themes";
-import Script from 'next/script'
 import DataLayer from './data-layer'
 import { Toaster } from '@/components/ui/toaster';
+import AdobeLaunchScript from '@/components/adobe-launch-script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,12 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <head>
-        <Script
-          src="https://assets.adobedtm.com/81adfcd42355/2c67a3825f8a/launch-688c37746f3a-development.min.js" async
-          strategy="beforeInteractive"
-        />
-      </head>
       <DataLayer />
       <body className={`${inter.className}`}>
         <ThemeProvider
@@ -40,8 +34,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-      <Toaster />
-      </ThemeProvider>
+          <Toaster />
+        </ThemeProvider>
+        <AdobeLaunchScript />
       </body>
     </html>
   );
