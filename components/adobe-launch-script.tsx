@@ -1,21 +1,26 @@
-'use client'
+/* eslint-disable @next/next/no-before-interactive-script-outside-document */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 
-import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import Script from "next/script";
+import { useEffect, useState } from "react";
 
 const AdobeLaunchScript = () => {
-  const [digitalData, setDigitalData] = useState<string>('')
+  const [digitalData, setDigitalData] = useState<string>("");
 
   useEffect(() => {
     const handleDigitalDataReady = (event: Event) => {
       if (window.digitalData) {
-        setDigitalData(`window.digitalData = ${JSON.stringify(window.digitalData)};`)
+        setDigitalData(
+          `window.digitalData = ${JSON.stringify(window.digitalData)};`
+        );
       }
-    }
+    };
 
-    window.addEventListener('digitalDataReady', handleDigitalDataReady)
-    return () => window.removeEventListener('digitalDataReady', handleDigitalDataReady)
-  }, [])
+    window.addEventListener("digitalDataReady", handleDigitalDataReady);
+    return () =>
+      window.removeEventListener("digitalDataReady", handleDigitalDataReady);
+  }, []);
 
   return (
     <>
@@ -34,7 +39,7 @@ const AdobeLaunchScript = () => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default AdobeLaunchScript
+export default AdobeLaunchScript;

@@ -256,15 +256,14 @@ const DataLayer = () => {
 
         // Set initialization flag and dispatch event
         setIsDataInitialized(true);
-        window.dispatchEvent(new CustomEvent('digitalDataReady'));
+        window.dispatchEvent(new CustomEvent("digitalDataReady"));
 
         // Reinitialize Adobe Launch if it's already loaded
         if (window._satellite) {
           window._satellite.pageBottom();
         }
-
       } catch (error) {
-        console.error('Error initializing digitalData:', error);
+        console.error("Error initializing digitalData:", error);
       }
     };
 
